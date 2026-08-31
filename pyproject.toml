@@ -1,0 +1,49 @@
+[project]
+name = "st"
+version = "0.0.1"
+description = "Sparse transformer models in JAX."
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.12"
+authors = [
+  {name = "Extropic"},
+]
+keywords = ["jax", "transformers", "sparse-neural-networks", "machine-learning"]
+urls = { repository = "https://github.com/extropic-ai/sparse-transformers" }
+dependencies = [
+    "equinox>=0.13.0",
+    "jax>=0.5.0",
+    "jaxtyping>=0.2.23",
+    "optax>=0.2.3",
+]
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+experiments = [
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+    "wandb>=0.18",
+]
+testing = [
+    "pre-commit>=4.0.0",
+    "pyright==1.1.408",
+]
+
+[tool.setuptools]
+packages = { find = { include = ["st", "st.*"] } }
+
+[tool.isort]
+profile = "black"
+combine_as_imports = true
+lines_after_imports = -1
+order_by_type = false
+
+[tool.black]
+target-version = ["py312"]
+
+[tool.pyright]
+reportUnnecessaryTypeIgnoreComment = true
+include = ["st"]

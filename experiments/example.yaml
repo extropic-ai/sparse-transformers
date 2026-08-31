@@ -1,0 +1,26 @@
+seed: 0
+name: owt
+data_path: data/
+optimizer:
+  lr: 0.0003
+  weight_decay: 0.1
+training:
+  batch_size: 512
+  val_log: 100
+  steps: 173439
+validation:
+  batch_size: 256
+  batches: 64
+wandb:
+  project: [your project]
+  entity: [your entity]
+  group: [your group]
+model:
+  vocab: 257
+  sequence: 256
+  n_layers: 10
+  n_embed: 1536
+  n_head: 16
+  attn_window: 4
+  linear_fan_in: 4
+  remat: false
