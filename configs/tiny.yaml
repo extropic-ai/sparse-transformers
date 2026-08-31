@@ -1,0 +1,32 @@
+# Char-level Shakespeare, small AFT-conv model. The default smoke-scale run.
+seed: 0
+name: tiny
+data:
+  dataset_name: shakespeare
+  data_path: ./data
+  val_frac: 0.1
+optimizer:
+  lr: 0.0003
+  weight_decay: 0.1
+  warmup: 100
+  grad_clip: 1.0
+  b1: 0.9
+  b2: 0.95
+training:
+  batch_size: 32
+  steps: 20000
+  log_every: 50
+  val_log: 250
+validation:
+  batches: 16
+wandb:
+  project: z1t
+  entity: ebm-tests
+model:
+  sequence: 256
+  n_layers: 6
+  n_embed: 384
+  aft_kind: conv
+  aft_heads: 8
+  aft_ksize: 4
+  dyt_alpha: 0.5
