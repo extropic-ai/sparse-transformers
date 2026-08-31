@@ -1,5 +1,5 @@
 # 6-step end-to-end sanity run: tiny model, addition, wandb off.
-#   JAX_PLATFORMS=cpu python -m z1t.train --config configs/smoke.yaml
+#   JAX_PLATFORMS=cpu python -m z1t.train --config configs/z1t_smoke.yaml
 seed: 0
 name: smoke
 data:

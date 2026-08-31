@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Train a z1t AFT transformer. The one entrypoint into this package.
 
-    python -m z1t.train --config configs/addition_aft_conv.yaml
+    python -m z1t.train --config configs/z1t_addition_aft_conv.yaml
 
 Same shape as `experiments/text_scaling.py`: a run is one nested yaml, `--config`
 points at it, and `model.vocab` / `model.sequence` are filled in from the dataset
@@ -66,7 +66,7 @@ SECTIONS = {
 def config_path(path):
     """Resolve a config path: as given, else relative to the repo root.
 
-    So `--config configs/tiny.yaml` works from the repo root AND from a
+    So `--config configs/z1t_tiny.yaml` works from the repo root AND from a
     cluster scratch dir or a container where cwd is elsewhere. Absolute paths
     and paths that exist as given are returned untouched.
     """
