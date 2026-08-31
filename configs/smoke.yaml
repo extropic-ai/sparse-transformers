@@ -1,0 +1,25 @@
+# 6-step end-to-end sanity run: tiny model, addition, wandb off.
+#   JAX_PLATFORMS=cpu python -m z1t.train --config configs/smoke.yaml
+seed: 0
+name: smoke
+data:
+  dataset_name: addition
+  max_n_digits: 3
+optimizer:
+  lr: 0.001
+  warmup: 1
+training:
+  batch_size: 8
+  steps: 6
+  log_every: 5
+  val_log: 5
+validation:
+  batches: 2
+wandb:
+  mode: disabled
+model:
+  n_layers: 2
+  n_embed: 64
+  aft_kind: conv
+  aft_heads: 4
+  aft_ksize: 4

@@ -1,0 +1,34 @@
+# Causal AFT-conv on the synthetic addition task (~1M params).
+# `sequence` is omitted on purpose: addition is fixed-length, so the dataset
+# sets it (3*max_n_digits + 4, minus one for the shifted target).
+seed: 0
+name: add
+data:
+  dataset_name: addition
+  max_n_digits: 3
+  n_tokens: 0          # 0 = unlimited fresh-sampled stream; >0 = fixed pool
+  data_seed: 0
+optimizer:
+  lr: 0.0005
+  weight_decay: 0.1
+  warmup: 500
+  grad_clip: 1.0
+  b1: 0.9
+  b2: 0.95
+training:
+  batch_size: 128
+  steps: 20000
+  log_every: 100
+  val_log: 500
+validation:
+  batches: 16
+wandb:
+  project: z1t
+  entity: ebm-tests
+model:
+  n_layers: 6
+  n_embed: 128
+  aft_kind: conv
+  aft_heads: 8
+  aft_ksize: 4
+  dyt_alpha: 0.5

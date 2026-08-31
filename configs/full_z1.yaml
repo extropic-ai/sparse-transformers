@@ -1,0 +1,34 @@
+# The full Z1-compilable form: AFT-conv attention, DyT norms, sparse linears at
+# both sites, and tanh on every linear (the clf head excepted) plus the MLP.
+seed: 0
+name: z1full
+data:
+  dataset_name: shakespeare
+  data_path: ./data
+  val_frac: 0.1
+optimizer:
+  lr: 0.0003
+  weight_decay: 0.1
+  warmup: 100
+  grad_clip: 1.0
+training:
+  batch_size: 32
+  steps: 20000
+  log_every: 50
+  val_log: 250
+validation:
+  batches: 16
+wandb:
+  project: z1t
+  entity: ebm-tests
+model:
+  sequence: 256
+  n_layers: 6
+  n_embed: 384
+  aft_kind: conv
+  aft_heads: 8
+  aft_ksize: 4
+  dyt_alpha: 0.5
+  linear_fan_in: 4     # null = dense; applies to both sites unless overridden
+  tanh_linear: true
+  tanh_mlp: true
