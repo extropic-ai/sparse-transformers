@@ -3,7 +3,7 @@ name = "st"
 version = "0.0.1"
 description = "Sparse transformer models in JAX."
 readme = "README.md"
-license = {file = "LICENSE"}
+license = {text = "Apache-2.0"}
 requires-python = ">=3.12"
 authors = [
   {name = "Extropic"},
@@ -27,14 +27,10 @@ experiments = [
     "tqdm>=4.66",
     "wandb>=0.18",
 ]
-testing = [
-    "pre-commit>=4.0.0",
-    "pyright==1.1.408",
-]
 
 [tool.setuptools]
-package-dir = { "" = "src" }
-packages = { find = { where = ["src"], include = ["st", "st.*"] } }
+packages = ["st"]
+package-dir = { "st" = "." }
 
 [tool.isort]
 profile = "black"
@@ -44,7 +40,3 @@ order_by_type = false
 
 [tool.black]
 target-version = ["py312"]
-
-[tool.pyright]
-reportUnnecessaryTypeIgnoreComment = true
-include = ["src/st"]
