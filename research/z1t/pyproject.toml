@@ -2,6 +2,7 @@
 name = "z1t"
 version = "0.0.1"
 description = "Attention-free (AFT) transformers in JAX, in Z1-compilable form."
+readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.12"
 authors = [
