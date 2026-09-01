@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import equinox as eqx
 import jax
-import jax.numpy as jnp
 from jaxtyping import Array, Key
 
 from z1t.components import Config, SparseLinear, TanhLinear, Z1T
@@ -44,20 +43,3 @@ def create_model(config: Config, key: Key[Array, ""]) -> Z1T:
         model = jax.tree.map(wrap, model, is_leaf=is_linear)
 
     return model
-
-
-def _test_z1t():
-    key = jax.random.PRNGKey(0)
-    config = Config(vocab=100, sequence=256, n_layers=4, n_embed=8,
-                    aft_kind="recurrence")
-    model = create_model(config, key)
-
-    print(eqx.tree_pformat(model))
-
-    # single sequence
-    toks = jnp.array([3, 1, 4, 1, 5])
-    print("logits:", model(toks).shape)                    # (5, 100)
-
-
-if __name__ == "__main__":
-    _test_z1t()

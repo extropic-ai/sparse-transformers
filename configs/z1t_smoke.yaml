@@ -1,5 +1,5 @@
 # 6-step end-to-end sanity run: tiny model, addition, wandb off.
-#   JAX_PLATFORMS=cpu python -m z1t.train --config configs/smoke.yaml
+#   JAX_PLATFORMS=cpu python -m z1t.train --config configs/z1t_smoke.yaml
 seed: 0
 name: smoke
 data:
@@ -16,7 +16,10 @@ training:
 validation:
   batches: 2
 wandb:
-  mode: disabled
+  project: "[your project]"
+  entity: "[your entity]"
+  group: "[your group]"
+  mode: disabled   # offline: this config is a sanity check, not a real run
 model:
   n_layers: 2
   n_embed: 64
