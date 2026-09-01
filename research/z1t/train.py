@@ -39,10 +39,11 @@ from z1t.dataset import (
 )
 from z1t.model import create_model
 
-# Config paths are resolved relative to this package, so a run works from any
-# working directory (repo root, a cluster scratch dir, a Modal container).
+# Config paths are resolved relative to the repo root, so a run works from any
+# working directory (repo root, a cluster scratch dir, a Modal container). The
+# package lives at research/z1t, so the root is two levels up, not one.
 PKG_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.dirname(PKG_DIR)
+REPO_ROOT = os.path.dirname(os.path.dirname(PKG_DIR))
 
 # Top-level sections a run yaml may define. Anything else is a typo, not a
 # silent no-op; unknown keys *inside* `model:` are caught by `Config(**block)`.
