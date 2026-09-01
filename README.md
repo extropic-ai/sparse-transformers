@@ -1,15 +1,8 @@
-# Sparse Transformers in JAX
+# Sparse Transformers Research
 
-Sparse Transformers is a [JAX](https://github.com/jax-ml/jax)-based library for building and training decoder models with local attention and fixed sparsity linear layers.
+This repository contains JAX research projects for sparse and attention variant transformer models.
 
-## Installation
+- [`research/st`](research/st): sparse causal transformer language models.
+- [`research/z1t`](research/z1t): Z1-compilable transformers.
 
-Requires Python 3.12+.
-
-To run the included training example:
-
-```bash
-git clone https://github.com/extropic-ai/sparse-transformers.git
-cd sparse-transformers
-pip install -e ".[experiments]"
-```
+Each project has its own `pyproject.toml`. Install a project from its own directory; see its README for commands.
