@@ -23,8 +23,9 @@ training:
 validation:
   batches: 16
 wandb:
-  project: z1t
-  entity: ebm-tests
+  project: "[your project]"
+  entity: "[your entity]"
+  group: "[your group]"
 model:
   n_layers: 6
   n_embed: 128

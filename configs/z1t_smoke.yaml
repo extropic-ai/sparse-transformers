@@ -16,7 +16,10 @@ training:
 validation:
   batches: 2
 wandb:
-  mode: disabled
+  project: "[your project]"
+  entity: "[your entity]"
+  group: "[your group]"
+  mode: disabled   # offline: this config is a sanity check, not a real run
 model:
   n_layers: 2
   n_embed: 64
