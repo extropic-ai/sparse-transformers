@@ -3,7 +3,7 @@ name = "z1t"
 version = "0.0.1"
 description = "Attention-free (AFT) transformers in JAX, in Z1-compilable form."
 readme = "README.md"
-license = "Apache-2.0"
+license = {text = "Apache-2.0"}
 requires-python = ">=3.12"
 authors = [
   {name = "Extropic"},
@@ -30,17 +30,12 @@ openwebtext = [
     "datasets>=2.14",
     "tiktoken>=0.5",
 ]
-testing = [
-    "pre-commit>=4.0.0",
-    "pyright==1.1.408",
-]
 
 [build-system]
-requires = ["setuptools >= 77.0"]
+requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
-# Flat layout: the modules sit directly in this directory rather than in a
-# src/z1t/ subdir, so map the package name onto ".".
+# Flat layout: the modules sit directly in this directory, as in research/st.
 [tool.setuptools]
 package-dir = { "z1t" = "." }
 packages = ["z1t"]
@@ -53,7 +48,3 @@ order_by_type = false
 
 [tool.black]
 target-version = ["py312"]
-
-[tool.pyright]
-reportUnnecessaryTypeIgnoreComment = true
-include = ["."]
