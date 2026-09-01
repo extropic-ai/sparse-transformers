@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Train a z1t AFT transformer. The one entrypoint into this package.
 
-    python -m z1t.train --config configs/addition_aft_conv.yaml
+    python -m z1t.train --config configs/z1t_addition_aft_conv.yaml
 
 Same shape as `experiments/text_scaling.py`: a run is one nested yaml, `--config`
 points at it, and `model.vocab` / `model.sequence` are filled in from the dataset
@@ -39,10 +39,11 @@ from z1t.dataset import (
 )
 from z1t.model import create_model
 
-# Config paths are resolved relative to this package, so a run works from any
-# working directory (repo root, a cluster scratch dir, a Modal container).
+# Config paths are resolved relative to the repo root, so a run works from any
+# working directory (repo root, a cluster scratch dir, a Modal container). The
+# package lives at research/z1t, so the root is two levels up, not one.
 PKG_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.dirname(PKG_DIR)
+REPO_ROOT = os.path.dirname(os.path.dirname(PKG_DIR))
 
 # Top-level sections a run yaml may define. Anything else is a typo, not a
 # silent no-op; unknown keys *inside* `model:` are caught by `Config(**block)`.
@@ -66,7 +67,7 @@ SECTIONS = {
 def config_path(path):
     """Resolve a config path: as given, else relative to the repo root.
 
-    So `--config configs/tiny.yaml` works from the repo root AND from a
+    So `--config configs/z1t_tiny.yaml` works from the repo root AND from a
     cluster scratch dir or a container where cwd is elsewhere. Absolute paths
     and paths that exist as given are returned untouched.
     """

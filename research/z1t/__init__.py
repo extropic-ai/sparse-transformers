@@ -7,7 +7,7 @@ optional tanh wrap on every linear.
 
 A run is one nested yaml, in the same shape `st` uses:
 
-    python -m z1t.train --config configs/addition_aft_conv.yaml
+    python -m z1t.train --config configs/z1t_addition_aft_conv.yaml
 
 Modules:
     train       the one entrypoint: config loading, run naming, the loop

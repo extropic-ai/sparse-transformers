@@ -1,7 +1,6 @@
-# Char-level Shakespeare at GPT-2-small shape. AFT-conv, not AFT-full:
-# at sequence=1024 the full variant's (T, T, n_embed) tensor does not fit.
+# Char-level Shakespeare, small AFT-conv model. The default smoke-scale run.
 seed: 0
-name: small
+name: tiny
 data:
   dataset_name: shakespeare
   data_path: ./data
@@ -14,22 +13,21 @@ optimizer:
   b1: 0.9
   b2: 0.95
 training:
-  batch_size: 128
+  batch_size: 32
   steps: 20000
   log_every: 50
   val_log: 250
-  ddp: false
 validation:
   batches: 16
 wandb:
-  project: z1t
-  entity: ebm-tests
+  project: "[your project]"
+  entity: "[your entity]"
+  group: "[your group]"
 model:
-  sequence: 1024
-  n_layers: 12
-  n_embed: 768
+  sequence: 256
+  n_layers: 6
+  n_embed: 384
   aft_kind: conv
-  aft_heads: 12
+  aft_heads: 8
   aft_ksize: 4
   dyt_alpha: 0.5
-  remat: true

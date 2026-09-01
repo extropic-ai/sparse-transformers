@@ -458,35 +458,3 @@ def make_addition(
         name=name,
         sample_len=L,
     )
-
-
-# ---------- quick self-check ---------------------------------------------
-
-if __name__ == "__main__":
-    key = jax.random.PRNGKey(0)
-
-    print("== addition (unlimited stream) ==")
-    add = make_addition(max_n_digits=5)
-    inp, tgt = add.get_batch(key, batch_size=4)
-    print(f"name = {add.name}, vocab_size = {add.vocab_size}, sample_len = {add.sample_len}")
-    print(f"inp shape  = {inp.shape}, tgt shape = {tgt.shape}")
-    print("first row decoded:")
-    print(repr(add.tokenizer.decode(inp[0])))
-    print(repr(add.tokenizer.decode(tgt[0])))
-
-    print("\n== addition (finite pool, n_tokens=2048) ==")
-    add_small = make_addition(max_n_digits=3, n_tokens=2048, pool_seed=0)
-    inp, tgt = add_small.get_batch(key, batch_size=4, split="train")
-    vinp, vtgt = add_small.get_batch(key, batch_size=4, split="val")
-    print(f"name = {add_small.name}, sample_len = {add_small.sample_len}")
-    print(f"train inp shape = {inp.shape}, val inp shape = {vinp.shape}")
-    print("first train row:", repr(add_small.tokenizer.decode(inp[0])))
-    print("first val   row:", repr(add_small.tokenizer.decode(vinp[0])))
-
-    print("\n== shakespeare ==")
-    shake = make_shakespeare()
-    inp, tgt = shake.get_batch(key, batch_size=2, max_seq=64)
-    print(f"vocab_size = {shake.vocab_size}")
-    print(f"inp shape  = {inp.shape}, tgt shape = {tgt.shape}")
-    print("first row decoded:")
-    print(repr(shake.tokenizer.decode(inp[0])))
