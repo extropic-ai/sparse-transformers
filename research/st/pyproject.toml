@@ -33,7 +33,8 @@ testing = [
 ]
 
 [tool.setuptools]
-packages = { find = { include = ["st", "st.*"] } }
+package-dir = { "" = "src" }
+packages = { find = { where = ["src"], include = ["st", "st.*"] } }
 
 [tool.isort]
 profile = "black"
@@ -46,4 +47,4 @@ target-version = ["py312"]
 
 [tool.pyright]
 reportUnnecessaryTypeIgnoreComment = true
-include = ["st"]
+include = ["src/st"]
