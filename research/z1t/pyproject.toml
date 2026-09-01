@@ -1,0 +1,58 @@
+[project]
+name = "z1t"
+version = "0.0.1"
+description = "Attention-free (AFT) transformers in JAX, in Z1-compilable form."
+license = "Apache-2.0"
+requires-python = ">=3.12"
+authors = [
+  {name = "Extropic"},
+]
+keywords = ["jax", "transformers", "attention-free", "sparse-neural-networks", "machine-learning"]
+urls = { repository = "https://github.com/extropic-ai/sparse-transformers" }
+# The trainer lives inside the package (z1t.train), unlike st's, which is an
+# outside script — so its deps are required, not an extra. Otherwise the
+# package's headline entrypoint would break on a bare install.
+dependencies = [
+    "equinox>=0.13.0",
+    "jax>=0.5.0",
+    "jaxtyping>=0.2.23",
+    "numpy>=1.26",
+    "optax>=0.2.3",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+    "wandb>=0.18",
+]
+
+[project.optional-dependencies]
+# Only dataset_name: openwebtext needs these, and it imports them lazily.
+openwebtext = [
+    "datasets>=2.14",
+    "tiktoken>=0.5",
+]
+testing = [
+    "pre-commit>=4.0.0",
+    "pyright==1.1.408",
+]
+
+[build-system]
+requires = ["setuptools >= 77.0"]
+build-backend = "setuptools.build_meta"
+
+# Flat layout: the modules sit directly in this directory rather than in a
+# src/z1t/ subdir, so map the package name onto ".".
+[tool.setuptools]
+package-dir = { "z1t" = "." }
+packages = ["z1t"]
+
+[tool.isort]
+profile = "black"
+combine_as_imports = true
+lines_after_imports = -1
+order_by_type = false
+
+[tool.black]
+target-version = ["py312"]
+
+[tool.pyright]
+reportUnnecessaryTypeIgnoreComment = true
+include = ["."]
