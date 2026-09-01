@@ -7,11 +7,16 @@ Sparse Transformers is a [JAX](https://github.com/jax-ml/jax)-based library for 
 Requires Python 3.12+.
 
 ```bash
-cd research/st
-pip install -e .
+git clone https://github.com/extropic-ai/sparse-transformers.git
+cd sparse-transformers
+pip install -e "research/st[experiments]"
 ```
 
-To run the training experiment:
+For the core model without experiment dependencies, use `pip install -e research/st`.
+
+## Training
+
+The OpenWebText experiment expects byte-tokenized `train.npy` and `validation.npy` files under the configured `data_path`. From the repository root, run:
 
 ```bash
 pip install -e ".[experiments]"
