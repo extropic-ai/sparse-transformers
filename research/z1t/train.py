@@ -3,7 +3,7 @@
 
     python -m z1t.train --config configs/z1t_addition_aft_conv.yaml
 
-Same shape as `experiments/text_scaling.py`: a run is one nested yaml, `--config`
+Same shape as `experiments/sparse_gpt_scaling.py`: a run is one nested yaml, `--config`
 points at it, and `model.vocab` / `model.sequence` are filled in from the dataset
 rather than the yaml, so a config cannot disagree with the data it trains on.
 There are no architecture flags — if a knob changes the model, it lives in the
@@ -147,7 +147,7 @@ def model_config(cfg, data) -> Config:
 def run_name(cfg, config: Config, data_name: str) -> str:
     """One self-describing run name — wandb name and checkpoint stem.
 
-    Same assembly as `experiments/text_scaling.py`: a `name:` stem, the always-on
+    Same assembly as `experiments/sparse_gpt_scaling.py`: a `name:` stem, the always-on
     shape, then one tag per knob that is actually active, joined with `-`. An
     explicit `run_name:` in the yaml wins outright.
     """

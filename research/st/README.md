@@ -20,5 +20,5 @@ The OpenWebText experiment expects byte-tokenized `train.npy` and `validation.np
 
 ```bash
 pip install -e ".[experiments]"
-python experiments/text_scaling.py --config experiments/example.yaml
+python experiments/sparse_gpt_scaling.py --config experiments/example.yaml
 ```

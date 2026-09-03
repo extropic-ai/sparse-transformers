@@ -1,4 +1,4 @@
-"""Text-scaling experiment for z1t — the AFT sibling of `text_scaling.py`.
+"""Text-scaling experiment for z1t — the AFT sibling of `sparse_gpt_scaling.py`.
 
 Same experiment and the same wandb keys; the model is a z1t AFT transformer
 rather than an st `Transformer`, so the parameter sharding follows z1t's tree
@@ -6,7 +6,7 @@ rather than an st `Transformer`, so the parameter sharding follows z1t's tree
 
     python -m experiments.z1t_scaling --config configs/z1t_tiny.yaml
 
-Two deliberate differences from `text_scaling.py`:
+Two deliberate differences from `sparse_gpt_scaling.py`:
 
 - No FLOPs accounting. `st.flops` is derived for windowed softmax attention and
   has no AFT counterpart, so there is no `total_flops` / `target_flops` here.

@@ -9,4 +9,4 @@ PY=python
 [ -x .venv/bin/python ] && PY=.venv/bin/python
 # the st / z1t packages live under research/, so put it on the import path
 export PYTHONPATH="research${PYTHONPATH:+:$PYTHONPATH}"
-"$PY" -m experiments.text_scaling --config configs/st_owt.yaml "$@"
+"$PY" -m experiments.sparse_gpt_scaling --config configs/st_owt.yaml "$@"
