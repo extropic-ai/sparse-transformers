@@ -30,7 +30,7 @@ import yaml
 from jax.sharding import PartitionSpec as P
 from tqdm import tqdm
 
-from z1t.components import AFT_KINDS, Config, active_params
+from z1t.components import AFT_KINDS, Config, active_params, weight_decay_mask
 from z1t.dataset import (
     make_addition,
     make_openwebtext,
@@ -309,6 +309,7 @@ def main():
             b1=opt_cfg.get("b1", 0.9),
             b2=opt_cfg.get("b2", 0.95),
             weight_decay=opt_cfg.get("weight_decay", 0.1),
+            mask=weight_decay_mask(model),
         ),
     )
     opt_state = optim.init(eqx.filter(model, eqx.is_inexact_array))

@@ -29,7 +29,7 @@ import wandb
 from jax.sharding import NamedSharding, PartitionSpec
 from tqdm import tqdm
 
-from z1t.components import active_params
+from z1t.components import active_params, weight_decay_mask
 from z1t.model import create_model
 from z1t.train import config_path, load_config, make_data, model_config, run_name
 
@@ -178,6 +178,7 @@ optimizer = optax.chain(
         b1=opt_cfg.get("b1", 0.9),
         b2=opt_cfg.get("b2", 0.95),
         weight_decay=opt_cfg.get("weight_decay", 0.1),
+        mask=weight_decay_mask(model),
     ),
 )
 opt_state = optimizer.init(eqx.filter(model, eqx.is_inexact_array))
