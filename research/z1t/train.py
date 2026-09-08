@@ -30,7 +30,7 @@ import yaml
 from jax.sharding import PartitionSpec as P
 from tqdm import tqdm
 
-from z1t.components import AFT_KINDS, Config, active_params
+from z1t.components import AFT_KINDS, Config, active_params, apply_trainable_updates
 from z1t.dataset import (
     make_addition,
     make_openwebtext,
@@ -199,7 +199,7 @@ def make_steps(optim):
         loss, grads = loss_and_grad(model, x, y)
         params = eqx.filter(model, eqx.is_inexact_array)
         updates, opt_state = optim.update(grads, opt_state, params)
-        model = eqx.apply_updates(model, updates)
+        model = apply_trainable_updates(model, updates)
         return model, opt_state, loss
 
     @eqx.filter_jit

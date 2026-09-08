@@ -453,14 +453,21 @@ class Z1T(eqx.Module):
 
 
 def active_params(model) -> int:
-    """Parameters that actually participate in the forward pass.
+    """Trainable parameters that actually participate in the forward pass.
 
-    Mirrors `st.active_params`, but for z1t it always equals the raw parameter
-    count: `SparseLinear` stores an `(out, k)` weight and gathers its inputs, so
-    every stored weight is live. (st's `SparseLinear` keeps a dense weight and
-    masks it, so there the two numbers differ.) Kept so run metadata carries the
-    same field in both trees.
+    `PE.pe` is a frozen buffer, not a parameter. Otherwise every stored z1t
+    weight is live: `SparseLinear` stores only its `(out, k)` active weights.
     """
-    return sum(
-        int(x.size) for x in jax.tree.leaves(eqx.filter(model, eqx.is_inexact_array))
-    )
+    params = eqx.filter(model, eqx.is_inexact_array)
+    params = eqx.tree_at(lambda root: root.pe.pe, params, None)
+    return sum(int(x.size) for x in jax.tree.leaves(params))
+
+
+def apply_trainable_updates(model, updates):
+    """Apply optimizer updates without modifying the frozen PE table.
+
+    Keeping AdamW itself unmasked preserves its optimizer-state pytree, so old
+    checkpoints remain loadable while future steps no longer decay `PE.pe`.
+    """
+    updates = eqx.tree_at(lambda root: root.pe.pe, updates, None)
+    return eqx.apply_updates(model, updates)

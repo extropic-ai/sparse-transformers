@@ -29,7 +29,7 @@ import wandb
 from jax.sharding import NamedSharding, PartitionSpec
 from tqdm import tqdm
 
-from z1t.components import active_params
+from z1t.components import active_params, apply_trainable_updates
 from z1t.model import create_model
 from z1t.train import config_path, load_config, make_data, model_config, run_name
 
@@ -51,7 +51,7 @@ def step(model, x, y, optimizer, opt_state, model_shardings=None, opt_shardings=
     updates, opt_state = optimizer.update(
         grads, opt_state, eqx.filter(model, eqx.is_inexact_array)
     )
-    model = eqx.apply_updates(model, updates)
+    model = apply_trainable_updates(model, updates)
     if model_shardings is not None:
         model = eqx.filter_shard(model, model_shardings)
         opt_state = eqx.filter_shard(opt_state, opt_shardings)
